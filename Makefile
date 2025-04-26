@@ -10,7 +10,7 @@ OTHERS_FLAGS	:=    -lSDL2 -lm
 
 IFLAGS			:=	-I ./includes -I ./libs/MacroLibX/includes -I ./libs/libft/includes
 
-LIBFT_PATH		:=	libs/libft
+LIBFT_PATH		:=	libs/libftt
 
 MACRO_PATH		:=	libs/MacroLibX
 	
