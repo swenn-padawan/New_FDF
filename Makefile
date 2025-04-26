@@ -8,6 +8,8 @@ CFLAGS			:=	-Wall -Werror -Wextra
 
 OTHERS_FLAGS	:=    -lSDL2 -lm
 
+IFLAGS			:=	-I ./includes -I ./libs/MacroLibX/includes -I ./libs/libft/includes
+
 LIBFT_PATH		:=	libs/libft
 
 MACRO_PATH		:=	libs/MacroLibX
@@ -16,11 +18,15 @@ OBJS_DIR		:=	.build
 
 RM				:=	rm -rf
 
+DIR_UP			=	mkdir -p $(@D)
+
 #-MANDA------------------------------------------------------------------------#
 
 SRCS_DIR		:=	srcs
 
 SRCS_MANDA		:=	main.c \
+					init/mlx_init.c \
+					hooks/window_hooks.c \
 
 SRCS_MANDA		:=	$(addprefix $(SRCS_DIR)/, $(SRCS_MANDA))
 
@@ -37,7 +43,7 @@ OBJS_MANDA		:=	$(addprefix $(OBJS_DIR)/, $(SRCS_MANDA:.c=.o))
 all: $(NAME)
 
 $(NAME): $(MACRO_PATH)/libmlx.so $(LIBFT_PATH)/libft.a $(OBJS_MANDA)
-	@$(CC) $(CFLAGS) $(OBJS_MANDA)  $(MACRO_PATH)/libmlx.so $(LIBFT_PATH)/libft.a $(OTHERS_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS_MANDA) $(LIBFT_PATH)/libft.a $(MACRO_PATH)/libmlx.so $(OTHERS_FLAGS) -o $(NAME)
 	@printf "$(GREEN)$(BOLD)$(ITALIC)■$(RESET)  building	$(GREEN)$(BOLD)$(ITALIC)$(NAME)$(RESET)\n"
 
 $(MACRO_PATH)/libmlx.so:
@@ -51,9 +57,9 @@ $(LIBFT_PATH)/libft.a:
 #	@$(CC) $(CFLAGS) $^ $(OTHERS_FLAGS) $(NAME_BONUS)
 
 $(OBJS_DIR)/%.o: %.c
-	@mkdir -p $(OBJS_DIR)
+	@$(DIR_UP)
 	@printf "$(CYAN)$(BOLD)$(ITALIC)■$(RESET)  compiling	$(GRAY)$(BOLD)$(ITALIC)$^$(RESET)\n"
-	@$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
 
 clean:
 	@$(RM) $(OBJS_DIR)
