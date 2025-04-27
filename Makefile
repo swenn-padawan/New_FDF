@@ -4,11 +4,11 @@ NAME			:=	fdf
 
 CC				:=	cc
 
-CFLAGS			:=	-Wall -Werror -Wextra
+CFLAGS			:=	-Wall -Werror -Wextra -g
 
 OTHERS_FLAGS	:=    -lSDL2 -lm
 
-IFLAGS			:=	-I ./includes -I ./libs/MacroLibX/includes -I ./libs/libft/includes
+IFLAGS			:=	-I ./includes -I ./libs/MacroLibX/includes -I ./libs/libft/include
 
 LIBFT_PATH		:=	libs/libft
 
@@ -27,6 +27,7 @@ SRCS_DIR		:=	srcs
 SRCS_MANDA		:=	main.c \
 					init/mlx_init.c \
 					hooks/window_hooks.c \
+					parsing/parse_file.c \
 
 SRCS_MANDA		:=	$(addprefix $(SRCS_DIR)/, $(SRCS_MANDA))
 
